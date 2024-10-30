@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hialpagu <hialpagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 18:06:44 by hialpagu          #+#    #+#             */
-/*   Updated: 2024/10/29 11:22:37 by hialpagu         ###   ########.fr       */
+/*   Created: 2024/10/30 15:36:01 by hialpagu          #+#    #+#             */
+/*   Updated: 2024/10/30 15:36:40 by hialpagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (s[i] && s[i] != (char)c)
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+		{
+			return ((char *)s + i);
+		}
 		i++;
+	}
 	if (s[i] == (char)c)
 		return ((char *)s + i);
 	return (NULL);

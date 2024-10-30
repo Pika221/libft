@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hialpagu <hialpagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 19:45:45 by hialpagu          #+#    #+#             */
-/*   Updated: 2024/10/29 18:11:11 by hialpagu         ###   ########.fr       */
+/*   Created: 2024/10/30 15:33:03 by hialpagu          #+#    #+#             */
+/*   Updated: 2024/10/30 16:00:24 by hialpagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,24 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*arr;
+	char	*str;
 	size_t	i;
 
 	i = 0;
-	if (len > ft_strlen(s))
-		len = ft_strlen(s);
-	arr = malloc(sizeof(char) * (len + 1));
-	while (i < len)
+	if (!s)
+		return (NULL);
+	else if (ft_strlen(s) < start)
+		return (ft_strdup(""));
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	str = malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	while (i < len && start < ft_strlen(s))
 	{
-		arr[i] = s[start];
+		str[i] = s[start + i];
 		i++;
-		start++;
 	}
-	arr[i] = '\0';
-	return (arr);
+	str[i] = '\0';
+	return (str);
 }
