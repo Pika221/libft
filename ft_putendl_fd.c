@@ -6,7 +6,7 @@
 /*   By: hialpagu <hialpagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:42:12 by hialpagu          #+#    #+#             */
-/*   Updated: 2024/10/08 20:11:19 by hialpagu         ###   ########.fr       */
+/*   Updated: 2024/11/02 22:24:33 by hialpagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	ft_putendl_fd(char *s, int fd)
 {
 	ft_putstr_fd(s, fd);
-	write (fd, "\n", 1);
+	write(fd, "\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: hialpagu <hialpagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:18:55 by hialpagu          #+#    #+#             */
-/*   Updated: 2024/10/31 19:14:34 by hialpagu         ###   ########.fr       */
+/*   Updated: 2024/11/02 22:26:21 by hialpagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	unsigned char	*s;
 
 	s = (unsigned char *)src;
-	if ((dest == src) || n == 0)
+	if (dest == src)
 		return (dest);
 	if (dest < src)
 		return (ft_memcpy(dest, src, n));

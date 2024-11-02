@@ -5,83 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hialpagu <hialpagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 19:44:28 by hialpagu          #+#    #+#             */
-/*   Updated: 2024/10/30 20:01:48 by hialpagu         ###   ########.fr       */
+/*   Created: 2024/11/02 21:18:21 by hialpagu          #+#    #+#             */
+/*   Updated: 2024/11/02 22:15:57 by hialpagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static int	total(char const *s, char c)
 {
-	int	t;
+	int	a;
 
-	t = 0;
+	a = 0;
 	while (*s)
 	{
-		if (*s == c)
+		while (*s == c)
 			s++;
-		else
-		{
-			t++;
-			while (*s != c && *s)
-				s++;
-		}
+		if (*s)
+			a++;
+		while (*s && *s != c)
+			s++;
 	}
-	return (t);
+	return (a);
 }
 
-static int	my_free(char **arr, int i)
+static void	ft_free(char **arr, int i)
 {
-	if (!*(arr + i))
+	while (i >= 0)
 	{
-		while (i > 0 && *(arr + i - 1))
-		{
-			free(*(arr + i - 1));
-			i--;
-		}
-		free (arr);
-		return (0);
+		free(arr[i]);
+		i--;
 	}
-	return (1);
-}
-
-static int	my_while(const char **s, char c, int *i, char **arr)
-{
-	int	j;
-
-	while (*(*s) == c)
-		(*s)++;
-	j = 0;
-	while (*((*s) + j) != c && *((*s) + j))
-		j++;
-	*(arr + *i) = ft_substr(*s, 0, j);
-	if (my_free(arr, *i) == 0)
-		return (0);
-	*s += j;
-	(*i)++;
-	return (1);
+	free(arr);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**arr;
+	char	**final;
 	int		i;
-	int		t;
+	int		j;
+	int		len;
 
-	if (!s)
+	len = total(s, c);
+	final = malloc(sizeof(char *) * (len + 1));
+	if (!final)
 		return (NULL);
-	t = total(s, c);
-	arr = malloc(sizeof(char *) * (t + 1));
-	if (!arr)
-		return (NULL);
-	i = 0;
-	while (i < t)
+	i = -1;
+	while (++i < len)
 	{
-		if (my_while(&s, c, &i, arr) == 0)
-			return (NULL);
+		while (*s == c)
+			s++;
+		j = 0;
+		while (s[j] != c && s[j])
+			j++;
+		final[i] = ft_substr(s, 0, j);
+		if (!final[i])
+			return (ft_free(final, i), NULL);
+		s += j;
 	}
-	*(arr + i) = 0;
-	return (arr);
+	final[i] = NULL;
+	return (final);
 }
